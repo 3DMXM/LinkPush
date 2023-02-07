@@ -3,7 +3,7 @@ import {
     Position,
     Operation,
     InfoFilled,
-    Setting,
+    Sugar,
 } from '@element-plus/icons-vue'
 
 
@@ -35,6 +35,12 @@ import {
                         <InfoFilled />
                     </el-icon>
                     <span>关于</span>
+                </el-menu-item>
+                <el-menu-item index="/donate">
+                    <el-icon>
+                        <Sugar />
+                    </el-icon>
+                    <span>给小莫投食</span>
                 </el-menu-item>
             </el-menu>
         </el-col>

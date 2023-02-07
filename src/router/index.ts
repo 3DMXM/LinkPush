@@ -12,16 +12,8 @@ const router = createRouter({
             path: "/configuration",
             name: "Configuration",
             component: () => import("@src/views/Configuration.vue"),
-            children: [
-                {
-                    path: "baidu",
-                    name: "ConfigurationBaidu",
-                    component: () => import("@src/components/Configuration/Baidu.vue"),
-                }
-            ]
         },
         {
-            // 设置
             path: "/settings",
             name: "Settings",
             component: () => import("@src/views/Settings.vue"),
@@ -30,6 +22,12 @@ const router = createRouter({
             path: "/about",
             name: "About",
             component: () => import("@src/views/About.vue"),
+        },
+        {
+            // 捐助我
+            path: "/donate",
+            name: "Donate",
+            component: () => import("@src/views/Donate.vue"),
         }
     ]
 });

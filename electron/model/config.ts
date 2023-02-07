@@ -3,19 +3,25 @@ import { readFileSync, writeFile } from 'node:fs'
 import { IConfig } from './Interfaces'
 
 const configFile = function () {
-    process.env.DIST_ELECTRON = join(__dirname, '..')
-    process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
-    process.env.PUBLIC = process.env.VITE_DEV_SERVER_URL
-        ? join(process.env.DIST_ELECTRON, '../public')
-        : process.env.DIST
-    // const configPath = path.join(__dirname, '../config.json')
-    const configPath = join(process.env.PUBLIC, 'config.json')
+
+    // 开发环境
+    if (process.env.NODE_ENV === 'development') {
+        let publicPath = join(process.env.DIST_ELECTRON, '../public')
+        const configPath = join(publicPath, 'config.json')
+        return configPath
+    }
+
+    // 生产环境
+    const configPath = join(process.resourcesPath, 'config.json')
+    console.log(configPath);
     return configPath
+
 }
 
 export function GetConfig() {
     // 读取 config.json 文件
     let configPath = configFile()
+
     const config = readFileSync(configPath, 'utf-8')
     return JSON.parse(config)
 }

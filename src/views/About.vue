@@ -1,16 +1,27 @@
 <script lang='ts' setup>
+import { ref } from "vue";
+import { ipcRenderer } from 'electron';
+import { marked } from 'marked';
+import 'github-markdown-css/github-markdown-dark.css'
+
+marked.setOptions({
+    breaks: true,
+})
+let readme = ref('')
+
+// 浏览器读取 /public/EADME.md
+fetch('README.md')
+    .then(res => res.text())
+    .then(text => {
+        readme.value = marked(text)
+    })
+
+
 
 </script>
 <template>
     <div class="about">
-        <h1>搜索引擎提交工具</h1>
-        <ol>
-            <li>本工具完成免费分享,禁止二次贩卖</li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ol>
+        <div class="markdown-body" v-html="readme"></div>
     </div>
 </template>
 <script lang='ts'>
@@ -21,8 +32,12 @@ export default {
 </script>
 <style lang='less' scoped>
 .about {
-    h1 {
-        text-align: center;
+    padding: 10px;
+    overflow: auto;
+    max-height: calc(100vh - 100px);
+
+    .markdown-body {
+        background-color: transparent;
     }
 }
 </style>

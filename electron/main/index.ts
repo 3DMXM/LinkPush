@@ -1,6 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain, Menu } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
+import fs from 'node:fs'
 import https from 'node:https'
 
 import { GetConfig, SetConfig } from '../model/config'
@@ -70,6 +71,12 @@ async function createWindow() {
         minHeight: height,
         frame: false,
     })
+    win.webContents.on('new-window', function (e, url) {
+        e.preventDefault();
+        // 使用默认浏览器打开url
+        shell.openExternal(url);
+    })
+
 
     if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
         win.loadURL(url)
@@ -201,6 +208,8 @@ ipcMain.handle('set-config', (event, arg) => {
 ipcMain.on('pubs-baidu', (event, arg) => {
     // links: string[], site: string, token: string, daily: boolean
     PubsToBaidu(arg.links, arg.site, arg.token, arg.daily, function (err, data) {
+        if (err) console.log(err);
+
         event.reply('pubs-reply', data)
     })
 })
@@ -208,6 +217,14 @@ ipcMain.on('pubs-baidu', (event, arg) => {
 ipcMain.on('pubs-bing', (event, arg) => {
     // urlList: string[], siteUrl: string, token: string
     PubsToBing(arg.links, arg.site, arg.token, function (err, data) {
+        if (err) console.log(err);
+
         event.reply('pubs-reply', data)
     })
+})
+
+ipcMain.handle('get-readme', (event, arg) => {
+    // 获取 readme.md 文件内容
+    let data = fs.readFileSync(join(process.env.PUBLIC, 'readme.md'), 'utf-8')
+    return data
 })

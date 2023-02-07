@@ -1,15 +1,15 @@
 {
-	"sitemap": "https://mod.3dmgame.com/sitemap/skyrim0.xml",
+	"sitemap": "",
 	"searchEngine": {
 		"baidu": true,
 		"bing": true,
 		"google": false
 	},
 	"baidu": {
-		"token": "llXQMl3kncP9awYz",
+		"token": "",
 		"daily": false
 	},
 	"bing": {
-		"token": "369aa2df56e448fa8ff6b69090feba04"
+		"token": ""
 	}
 }

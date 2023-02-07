@@ -3,8 +3,12 @@ import { ipcRenderer } from "electron";
 import { link } from "fs";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
+import Dialog from '@src/components/Dialog.vue'
 
 const store = useStore();
+const router = useRouter();
 
 let searchEngine = computed(() => store.state.searchEngine)
 let baidu = computed(() => store.state.baidu)
@@ -18,6 +22,14 @@ let links = computed<string[]>(() => {
 
 let sitemapLoading = ref(false)
 let submitLoading = ref(false)
+
+let message = ref("")
+let showDialog = ref(false)
+let confirmText = ref("确定")
+let cancelText = ref("取消")
+let confirm = ref(() => {
+    router.push({ name: 'Configuration' })
+})
 
 function getNewArray(arr: any[], size: number) {
     const arrNum = Math.ceil(arr.length / size);
@@ -46,11 +58,30 @@ let site = computed(() => {
 })
 
 function submit() {
+
+    if (links.value.length == 0) {
+        message.value = "请先输入要提交的链接地址"
+        showDialog.value = true
+        confirm.value = () => {
+            showDialog.value = false
+        }
+        return
+    }
+
     // 将 links 分割为每组2000条 links = [[...],[...]]
     let _links = getNewArray(links.value, 500)
 
     _links.forEach(item => {
         if (searchEngine.value.baidu) {
+
+            if (!baidu.value.token) {
+                message.value = "请先配置百度推送token"
+                showDialog.value = true
+                confirm.value = () => {
+                    router.push({ name: 'Configuration' })
+                }
+                return
+            }
             ipcRenderer.send('pubs-baidu', {
                 links: item,
                 site: site.value?.toString(),
@@ -59,6 +90,15 @@ function submit() {
             })
         }
         if (searchEngine.value.bing) {
+            if (!bing.value.token) {
+                message.value = "请先配置必应推送token"
+                showDialog.value = true
+                confirm.value = () => {
+                    router.push({ name: 'Configuration' })
+                }
+                return
+            }
+
             ipcRenderer.send('pubs-bing', {
                 links: item,
                 site: site.value?.toString(),
@@ -86,6 +126,11 @@ ipcRenderer.on('get-sitemap-links-reply', (_event, links) => {
             <el-button type="primary" @click="submit" :loading="submitLoading">提交</el-button>
         </el-col>
     </el-row>
+    <Teleport to="body">
+        <Dialog title="提示" :message="message" :cancelText="cancelText" :confirmText="confirmText"
+            v-model:value="showDialog" @cancel="showDialog = false" @confirm="confirm">
+        </Dialog>
+    </Teleport>
 </template>
 <script lang='ts'>
 
