@@ -1,8 +1,8 @@
 {
     "name": "link-push",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "dist-electron/main/index.js",
-    "description": "多搜索引擎链接提交工具.",
+    "description": "搜索引擎链接提交工具.",
     "author": "小莫 <xiaomo1433675239@outlook.com>",
     "license": "MIT",
     "private": true,

@@ -16,8 +16,6 @@ fetch('README.md')
         readme.value = marked(text)
     })
 
-
-
 </script>
 <template>
     <div class="about">
