@@ -27,7 +27,7 @@
         "@element-plus/icons-vue": "^2.0.10",
         "@types/marked": "^4.0.8",
         "@vitejs/plugin-vue": "^4.0.0",
-        "electron": "^22.0.3",
+        "electron": "^23.0.0",
         "electron-builder": "^23.6.0",
         "electron-request": "^1.8.1",
         "element-plus": "^2.2.29",
