@@ -43,29 +43,26 @@
     user-select: none;
 }
 
-.el-row {
-    margin-bottom: 15px;
+body {
+    margin: 0;
+    padding: 0;
 }
 
-.el-main {
-    overflow: hidden;
-    max-height: calc(100vh - 50px);
-    padding: 10px;
-}
+.empty {
+    display: flex;
+    padding: 2rem;
 
-.h2-title {
-    font-size: 20px;
-    font-weight: bold;
-    // margin-bottom: 20px;
-}
+    .empty-hint {
+        flex: 1 1 auto;
+        min-height: 300px;
+        border: 1px dashed #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
 
-.h3-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.h4-title {
-    font-size: 12px;
-    margin-bottom: 10px;
+        &:hover {
+            background-color: #2c2c2c;
+        }
+    }
 }

@@ -1,50 +1,45 @@
 <script lang='ts' setup>
-import {
-    Position,
-    Operation,
-    InfoFilled,
-    Sugar,
-} from '@element-plus/icons-vue'
+import { useMain } from '@src/stores/useMain';
+import { useSettings } from '@src/stores/useSettings';
 
+
+const main = useMain()
+const settings = useSettings()
+
+let lists = [
+    {
+        title: '首页',
+        icon: "mdi-home",
+        path: '/',
+    },
+    {
+        title: '设置',
+        icon: "mdi-cog",
+        path: '/settings',
+    },
+    {
+        title: '关于',
+        icon: "mdi-information",
+        path: '/about',
+    }
+]
 
 </script>
 <template>
-    <el-row class="tac">
-        <el-col>
-            <el-menu class="left-menu" :default-active="$route.path" router>
-                <el-menu-item index="/">
-                    <el-icon>
-                        <Position />
-                    </el-icon>
-                    <span>链接提交</span>
-                </el-menu-item>
-                <el-menu-item index="/configuration">
-                    <el-icon>
-                        <Operation />
-                    </el-icon>
-                    <span>接口配置</span>
-                </el-menu-item>
-                <!-- <el-menu-item index="/settings">
-                    <el-icon>
-                        <Setting />
-                    </el-icon>
-                    <span>工具设置</span>
-                </el-menu-item> -->
-                <el-menu-item index="/about">
-                    <el-icon>
-                        <InfoFilled />
-                    </el-icon>
-                    <span>关于</span>
-                </el-menu-item>
-                <el-menu-item index="/donate">
-                    <el-icon>
-                        <Sugar />
-                    </el-icon>
-                    <span>给小莫投食</span>
-                </el-menu-item>
-            </el-menu>
-        </el-col>
-    </el-row>
+    <v-navigation-drawer v-model="main.leftMenu" :rail="settings.leftMenuRail" permanent width="200">
+        <v-list>
+            <v-list-item v-for="item in lists" :key="item.path" :to="item.path" :prepend-icon="item.icon"
+                :title="item.title">
+            </v-list-item>
+        </v-list>
+        <template v-slot:append>
+            <v-list>
+                <v-list-item @click="settings.leftMenuRail = !settings.leftMenuRail"
+                    :prepend-icon="settings.leftMenuRail ? 'mdi-chevron-double-right' : 'mdi-chevron-double-left'">
+                </v-list-item>
+            </v-list>
+        </template>
+    </v-navigation-drawer>
 </template>
 <script lang='ts'>
 
@@ -52,8 +47,4 @@ export default {
     name: 'LeftMenu',
 }
 </script>
-<style lang='less' scoped>
-.left-menu {
-    height: calc(100vh - 50px);
-}
-</style>
+<style lang='less' scoped></style>

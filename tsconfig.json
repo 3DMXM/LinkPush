@@ -1,20 +1,27 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
+        "target": "ES2020",
         "useDefineForClassFields": true,
         "module": "ESNext",
-        "moduleResolution": "Node",
-        "strict": true,
-        "jsx": "preserve",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "esModuleInterop": true,
         "lib": [
-            "ESNext",
-            "DOM"
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
         ],
         "skipLibCheck": true,
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
         "noEmit": true,
+        "jsx": "preserve",
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "esModuleInterop": true,
         "paths": {
             // 根据别名配置相关路径
             "@src/*": [
@@ -23,11 +30,15 @@
         }
     },
     "include": [
-        "src",
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "electron"
     ],
     "references": [
         {
             "path": "./tsconfig.node.json"
         }
-    ],
+    ]
 }

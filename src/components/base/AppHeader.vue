@@ -1,5 +1,6 @@
 <script lang='ts' setup>
 import { ipcRenderer } from 'electron'
+
 function handleMinimize() {
     ipcRenderer.send('window-min')
 }
@@ -9,43 +10,48 @@ function handleMaximize() {
 function handleClose() {
     ipcRenderer.send('window-close')
 }
-
 </script>
 <template>
-    <div class="title-bar">
-        <div class="title-bar-dragger"> <el-avatar src="favicon.ico" class="logo" :size="24"></el-avatar> 搜索引擎提交工具 By:小莫
+    <v-app-bar>
+        <div class="title-bar">
+            <div class="title-bar-dragger">
+                <v-avatar class="logo">
+                    <v-img src="public/favicon.ico"></v-img>
+                </v-avatar>
+                <span>搜索引擎链接提交工具</span>
+            </div>
+            <div class="window-actions">
+                <li @click="handleMinimize" title="最小化窗口">
+                    <svg version="1.1" role="presentation" width="12" height="12" viewBox="0 0 12 12" class="mo-icon">
+                        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+                            <line x1="1" y1="6" x2="11" y2="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            </line>
+                        </g>
+                    </svg>
+                </li>
+                <li @click="handleMaximize" title="最大/还原窗口">
+                    <svg version="1.1" role="presentation" width="12" height="12" viewBox="0 0 12 12" class="mo-icon">
+                        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+                            <polyline points="5.5 1.5 10.5 1.5 10.5 6.5" fill="none" stroke-linecap="round"
+                                stroke-linejoin="round"></polyline>
+                            <polyline points="1.5 5.5 1.5 10.5 6.5 10.5" fill="none" stroke-linecap="round"
+                                stroke-linejoin="round"></polyline>
+                        </g>
+                    </svg>
+                </li>
+                <li @click="handleClose" title="关闭">
+                    <svg version="1.1" role="presentation" width="12" height="12" viewBox="0 0 12 12" class="mo-icon">
+                        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+                            <line x1="1.5" y1="1.5" x2="10.5" y2="10.5" fill="none" stroke-linecap="round"
+                                stroke-linejoin="round"></line>
+                            <line x1="10.5" y1="1.5" x2="1.5" y2="10.5" fill="none" stroke-linecap="round"
+                                stroke-linejoin="round"></line>
+                        </g>
+                    </svg>
+                </li>
+            </div>
         </div>
-        <div class="window-actions">
-            <li @click="handleMinimize" title="最小化窗口">
-                <svg version="1.1" role="presentation" width="12" height="12" viewBox="0 0 12 12" class="mo-icon">
-                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
-                        <line x1="1" y1="6" x2="11" y2="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        </line>
-                    </g>
-                </svg>
-            </li>
-            <li @click="handleMaximize" title="放大/还原窗口">
-                <svg version="1.1" role="presentation" width="12" height="12" viewBox="0 0 12 12" class="mo-icon">
-                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
-                        <polyline points="5.5 1.5 10.5 1.5 10.5 6.5" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round"></polyline>
-                        <polyline points="1.5 5.5 1.5 10.5 6.5 10.5" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round"></polyline>
-                    </g>
-                </svg>
-            </li>
-            <li @click="handleClose" title="关闭">
-                <svg version="1.1" role="presentation" width="12" height="12" viewBox="0 0 12 12" class="mo-icon">
-                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
-                        <line x1="1.5" y1="1.5" x2="10.5" y2="10.5" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round"></line>
-                        <line x1="10.5" y1="1.5" x2="1.5" y2="10.5" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round"></line>
-                    </g>
-                </svg>
-            </li>
-        </div>
-    </div>
+    </v-app-bar>
 </template>
 <script lang='ts'>
 
@@ -62,9 +68,10 @@ export default {
     align-items: center;
     flex-direction: row;
     width: 100%;
+    height: 100%;
     padding: 0.25rem 0.5rem;
     z-index: 5000;
-    background: #343333;
+    // background: #343333;
     border-radius: 5px 5px 0 0;
 
     .title-bar-dragger {
@@ -75,9 +82,12 @@ export default {
         padding-left: 15px;
         display: flex;
         align-items: center;
+        height: 60px;
 
         .logo {
             margin-right: 10px;
+            width: 30px;
+            height: 30px;
         }
     }
 

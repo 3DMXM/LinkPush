@@ -2,9 +2,11 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  "appId": "YourAppID",
-  "asar": true,
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
+  "appId": "linkpush.aoe.top",
   "icon": "public/favicon.ico",
+  "productName": "搜索引擎链接提交工具",
+  "asar": true,
   "directories": {
     "output": "release/${version}"
   },

@@ -9,11 +9,6 @@ const router = createRouter({
             component: () => import("@src/views/Home.vue"),
         },
         {
-            path: "/configuration",
-            name: "Configuration",
-            component: () => import("@src/views/Configuration.vue"),
-        },
-        {
             path: "/settings",
             name: "Settings",
             component: () => import("@src/views/Settings.vue"),
@@ -22,15 +17,8 @@ const router = createRouter({
             path: "/about",
             name: "About",
             component: () => import("@src/views/About.vue"),
-        },
-        {
-            // 捐助我
-            path: "/donate",
-            name: "Donate",
-            component: () => import("@src/views/Donate.vue"),
         }
     ]
-});
-
+})
 
 export default router;

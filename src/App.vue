@@ -1,40 +1,30 @@
 <script lang='ts' setup>
-import { initialization } from '@src/model/initialization'
-
 import AppHeader from '@src/components/base/AppHeader.vue'
 import LeftMenu from '@src/components/base/LeftMenu.vue'
+import Global from '@src/components/base/Global.vue'
 
-initialization()
 
 </script>
 <template>
-	<div class="common-layout">
-		<AppHeader></AppHeader>
-		<div class="main common-layout">
-			<el-container>
-				<el-aside width="200px">
-					<LeftMenu></LeftMenu>
-				</el-aside>
-				<el-main>
-					<router-view></router-view>
-				</el-main>
-			</el-container>
-		</div>
-	</div>
+    <v-card>
+        <v-layout>
+            <Global></Global>
+            <AppHeader></AppHeader>
+            <LeftMenu></LeftMenu>
+            <v-main style="min-height: 100vh;">
+                <router-view v-slot="{ Component }">
+                    <keep-alive>
+                        <component :is="Component" />
+                    </keep-alive>
+                </router-view>
+            </v-main>
+        </v-layout>
+    </v-card>
 </template>
-
 <script lang='ts'>
 
 export default {
-	name: 'App',
+    name: 'App',
 }
 </script>
-<style lang='less' scoped>
-.common-layout {
-	.main {
-		margin-top: 40px;
-		max-height: calc(100vh - 50px);
-		overflow: hidden;
-	}
-}
-</style>
+<style lang='less' scoped></style>

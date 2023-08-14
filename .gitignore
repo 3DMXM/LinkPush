@@ -15,7 +15,8 @@ release
 *.local
 
 # Editor directories and files
-.vscode/.debug.env
+.vscode/*
+!.vscode/extensions.json
 .idea
 .DS_Store
 *.suo
@@ -23,8 +24,3 @@ release
 *.njsproj
 *.sln
 *.sw?
-
-# lockfile
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
