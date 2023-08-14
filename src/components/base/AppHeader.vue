@@ -16,7 +16,7 @@ function handleClose() {
         <div class="title-bar">
             <div class="title-bar-dragger">
                 <v-avatar class="logo">
-                    <v-img src="public/favicon.ico"></v-img>
+                    <v-img src="https://raw.githubusercontent.com/3DMXM/LinkPush/master/public/favicon.ico"></v-img>
                 </v-avatar>
                 <span>搜索引擎链接提交工具</span>
             </div>

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import path from 'node:path'
 import { release } from 'node:os'
 import https from 'node:https'
@@ -68,6 +68,12 @@ function createWindow() {
         // win.loadFile('dist/index.html')
         win.loadFile(path.join(process.env.DIST, 'index.html'))
     }
+
+    // 新窗口打开链接
+    win.webContents.setWindowOpenHandler(({ url }) => {
+        if (url.startsWith('https:')) shell.openExternal(url)
+        return { action: 'deny' }
+    })
 }
 
 app.on('window-all-closed', () => {

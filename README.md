@@ -8,8 +8,10 @@
 
 
 ### 介绍
-我在很久以前有做过一个百度的链接提交工具, 后来由于百度添加了API一次性提交地址上限，然后由于我长时间没有更新，导致工具已经无法使用。  
-最近我在研究 Electron 和 Vue3的程序构建，于是决定写这个工具来练手， 发现国内大受好评的 Element Plus 并不好用, 所以改用全球热门的Vuetify 3  重构UI.  
+我在很久以前有做过一个百度的链接提交工具, 后来由于百度添加了API一次性提交地址上限.
+然后由于我长时间没有更新，导致工具已经无法使用。  
+最近我在研究 Electron 和 Vue3的程序构建，于是决定写这个工具来练手.
+发现国内大受好评的 Element Plus 并不好用, 所以改用全球热门的Vuetify 3  重构UI.  
 虽然是练手用的工具，功能就目前而言，还是挺丰富的，页面我觉得也挺好看的。  
 要说唯一的缺点，那可能就是打包后文件体积太大。  
 
@@ -24,7 +26,7 @@
 
 ### 使用方法
 
-如果你的首次使用，请先到 [接口配置](#/configuration)里配置相关Token,
+如果你的首次使用，请先到 [接口配置](#/Settings)里配置相关Token,
 > 百度token在: <a href="https://ziyuan.baidu.com/linksubmit/index" target="_blank" >https://ziyuan.baidu.com/linksubmit/index</a>   
 > BingToken在: <a href="https://learn.microsoft.com/en-us/bingwebmaster/getting-access?source=recommendations" target="_blank" >https://learn.microsoft.com/en-us/bingwebmaster/getting-access?source=recommendations</a> 
 
